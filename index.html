@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mohit Chimote — FinTech Product & Architecture</title>
+<meta name="description" content="Mohit Chimote — Product Manager and architect in UK regulated financial services. 13 years at TCS building mortgage origination platforms, AI systems, and digital lending products.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0D1117;
+  --text:#E8E6E1;
+  --text-2:#9AA0AC;
+  --text-3:#6B7280;
+  --amber:#C8922A;
+  --surface:#131A22;
+  --rule:rgba(232,230,225,0.08);
+}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--text);font-family:'Inter',sans-serif;font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased;}
+a{color:inherit;text-decoration:none}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(13,17,23,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);padding:0 2rem;height:56px;display:flex;align-items:center;justify-content:space-between;}
+.nav-name{font-family:'DM Serif Display',serif;font-size:18px;letter-spacing:0.01em;}
+.nav-links{display:flex;gap:2rem}
+.nav-links a{font-size:13px;font-weight:500;color:var(--text-2);letter-spacing:0.04em;text-transform:uppercase;transition:color 0.2s;}
+.nav-links a:hover{color:var(--text)}
+
+main{padding-top:56px}
+section{max-width:720px;margin:0 auto;padding:5rem 2rem;}
+section+section{border-top:1px solid var(--rule)}
+.hero{padding-top:7rem;padding-bottom:6rem}
+
+.hero-eyebrow{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;color:var(--amber);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1.25rem;}
+h1{font-family:'DM Serif Display',serif;font-size:clamp(2.8rem,6vw,4.2rem);line-height:1.1;letter-spacing:-0.01em;color:var(--text);margin-bottom:1.5rem;}
+.hero-line{font-size:1.075rem;color:var(--text-2);line-height:1.7;max-width:560px;margin-bottom:2.5rem;}
+.tags{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:3rem}
+.tag{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;color:var(--amber);background:rgba(200,146,42,0.08);border:1px solid rgba(200,146,42,0.2);padding:4px 10px;border-radius:3px;letter-spacing:0.06em;}
+.cta-row{display:flex;gap:1rem;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:500;padding:10px 20px;border-radius:4px;transition:all 0.2s;cursor:pointer;letter-spacing:0.02em;}
+.btn-primary{background:var(--amber);color:#0D1117;border:1px solid var(--amber)}
+.btn-primary:hover{background:#d4981e;border-color:#d4981e}
+.btn-ghost{background:transparent;color:var(--text-2);border:1px solid var(--rule)}
+.btn-ghost:hover{color:var(--text);border-color:rgba(232,230,225,0.2)}
+
+.section-label{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;color:var(--amber);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:2rem;display:flex;align-items:center;gap:10px;}
+.section-label::after{content:'';flex:1;height:1px;background:var(--rule)}
+h2{font-family:'DM Serif Display',serif;font-size:clamp(1.6rem,3vw,2rem);line-height:1.25;margin-bottom:1rem;color:var(--text);}
+.section-intro{font-size:1rem;color:var(--text-2);max-width:560px;margin-bottom:3rem;line-height:1.7;}
+
+.about-body{font-size:1rem;color:var(--text-2);line-height:1.75;max-width:600px}
+.about-body p+p{margin-top:1rem}
+.about-highlight{color:var(--text)}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:2.5rem;}
+.skill-cell{background:var(--ink);padding:1.25rem}
+.skill-cell-label{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;color:var(--amber);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.6rem;}
+.skill-cell-items{font-size:13px;color:var(--text-2);line-height:1.85}
+
+.projects-list{display:flex;flex-direction:column}
+.project-item{padding:1.75rem 0;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:1fr auto;gap:1.5rem;align-items:start;}
+.project-item:first-child{border-top:1px solid var(--rule)}
+.project-number{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;color:var(--amber);letter-spacing:0.1em;margin-bottom:0.35rem;}
+.project-name{font-family:'DM Serif Display',serif;font-size:1.2rem;color:var(--text);margin-bottom:0.4rem;line-height:1.3;}
+.project-desc{font-size:13.5px;color:var(--text-2);line-height:1.65;max-width:480px;margin-bottom:0.75rem;}
+.project-status{display:inline-flex;align-items:center;gap:5px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;letter-spacing:0.06em;padding:3px 8px;border-radius:2px;margin-bottom:0.6rem;}
+.status-live{color:#4ade80;background:rgba(74,222,128,0.08);border:1px solid rgba(74,222,128,0.2);}
+.status-poc{color:var(--amber);background:rgba(200,146,42,0.08);border:1px solid rgba(200,146,42,0.2);}
+.status-built{color:var(--text-3);background:rgba(107,114,128,0.1);border:1px solid rgba(107,114,128,0.2);}
+.status-dot{width:5px;height:5px;border-radius:50%;background:currentColor;flex-shrink:0}
+.project-stack{display:flex;flex-wrap:wrap;gap:4px;margin-top:0.5rem}
+.stack-tag{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-3);background:var(--surface);border:1px solid var(--rule);padding:2px 7px;border-radius:2px;letter-spacing:0.04em;}
+.project-link{font-size:12px;font-weight:500;color:var(--amber);white-space:nowrap;display:flex;align-items:center;gap:4px;padding:6px 12px;border:1px solid rgba(200,146,42,0.25);border-radius:3px;transition:all 0.2s;margin-top:4px;flex-shrink:0;}
+.project-link:hover{background:rgba(200,146,42,0.07);border-color:rgba(200,146,42,0.5)}
+
+/* WORK */
+.work-timeline{display:flex;flex-direction:column;gap:0}
+.work-phase{padding:1.5rem 0;border-bottom:1px solid var(--rule);}
+.work-phase:first-child{border-top:1px solid var(--rule)}
+.work-phase-header{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:0.5rem;margin-bottom:0.2rem;}
+.work-phase-role{font-family:'DM Serif Display',serif;font-size:1.05rem;color:var(--text);}
+.work-phase-period{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--amber);letter-spacing:0.08em;white-space:nowrap;}
+.work-phase-points{list-style:none;padding:0;margin-top:0.6rem}
+.work-phase-points li{font-size:13.5px;color:var(--text-2);padding:3px 0 3px 1.1rem;position:relative;line-height:1.6;}
+.work-phase-points li::before{content:'—';position:absolute;left:0;color:var(--amber);font-size:11px;top:5px;}
+.work-company-header{margin-bottom:0.25rem}
+.work-company-name{font-size:13px;font-weight:500;color:var(--text-2);margin-bottom:1.5rem;}
+.work-stat{color:var(--text);font-weight:500;}
+
+.certs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin-top:1rem;}
+.cert-item{background:var(--ink);padding:0.9rem 1.1rem;font-size:13px;color:var(--text-2);line-height:1.5;}
+.cert-issuer{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--amber);letter-spacing:0.06em;margin-bottom:0.2rem;}
+
+.contact-block{background:var(--surface);border:1px solid var(--rule);padding:2.5rem;border-radius:4px;}
+.contact-line{font-size:1rem;color:var(--text-2);margin-bottom:2rem;line-height:1.7}
+.contact-links{display:flex;flex-wrap:wrap;gap:0.75rem}
+.contact-link{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:var(--text-2);padding:8px 16px;border:1px solid var(--rule);border-radius:3px;transition:all 0.2s;}
+.contact-link:hover{color:var(--amber);border-color:rgba(200,146,42,0.3)}
+.contact-link svg{width:14px;height:14px;flex-shrink:0}
+
+footer{max-width:720px;margin:0 auto;padding:2rem;border-top:1px solid var(--rule);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+footer p{font-size:12px;color:var(--text-3)}
+
+@media(max-width:600px){
+  .nav-links{display:none}
+  h1{font-size:2.4rem}
+  .project-item{grid-template-columns:1fr}
+  .project-link{width:fit-content}
+  .contact-block{padding:1.5rem}
+  section{padding:3.5rem 1.25rem}
+  .hero{padding-top:5rem;padding-bottom:4rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="nav-name">Mohit Chimote</span>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#work">Work</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
+
+<main>
+
+<section class="hero" id="top">
+  <p class="hero-eyebrow">London, UK &nbsp;·&nbsp; Product Manager · FinTech · TCS since 2012</p>
+  <h1>Solving mortgage lending<br>problems since 2012.<br>Now with AI.</h1>
+  <p class="hero-line">
+    I'm a product manager and architect at TCS, where I've spent over a decade building and delivering digital mortgage origination platforms for banks and building societies. Lately I've been going deeper into applied AI and hands-on engineering — designing local LLM inference systems, building edge-native SaaS products, and shipping things that actually run.
+  </p>
+  <div class="tags">
+    <span class="tag">[ UK Mortgage Origination ]</span>
+    <span class="tag">[ Applied AI ]</span>
+    <span class="tag">[ Product Management ]</span>
+    <span class="tag">[ FCA · MCOB · Consumer Duty ]</span>
+    <span class="tag">[ Edge-Native SaaS ]</span>
+  </div>
+  <div class="cta-row">
+    <a href="#work" class="btn btn-primary">My experience</a>
+    <a href="#projects" class="btn btn-ghost">Personal projects</a>
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-label">About</div>
+  <h2>Domain depth meets hands-on engineering.</h2>
+  <div class="about-body">
+    <p>I joined TCS in 2012 as a graduate and have spent 14 years across programme delivery, implementation, presales, and product management — all in financial services, and predominantly in UK mortgage lending. I know this domain properly: the regulatory landscape, the lender economics, the broker relationships, the processing bottlenecks, and where technology can genuinely move the needle.</p>
+    <p>Over the past couple of years I've been investing deliberately in hands-on engineering. I wanted to close the gap between designing systems and building them — so I built a local LLM inference microservice for financial services document processing, architected a multi-agent underwriting pipeline, and shipped several personal SaaS products across different domains. Some are live with real users. Some are proof-of-concepts exploring what's feasible.</p>
+    <p>I hold a <span class="about-highlight">BEng in Computer Science &amp; Engineering</span>, a <span class="about-highlight">PG Diploma in Management</span> from Welingkar, and am <span class="about-highlight">Microsoft Azure certified</span>. I'm based in <span class="about-highlight">Grays, Essex</span> and work across London.</p>
+  </div>
+
+  <div class="skills-grid">
+    <div class="skill-cell">
+      <div class="skill-cell-label">Domain</div>
+      <div class="skill-cell-items">UK Mortgage Lending<br>FCA · MCOB · Consumer Duty<br>Loan Origination Systems<br>Open Banking</div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-cell-label">Product</div>
+      <div class="skill-cell-items">Product Roadmapping<br>Backlog &amp; Sprint Delivery<br>User Journey Design<br>RFI / RFP · Presales</div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-cell-label">AI / Engineering</div>
+      <div class="skill-cell-items">Local LLM · Ollama · Gemma<br>FastAPI · Node.js · Python<br>React · TypeScript<br>Cloudflare · Supabase</div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-cell-label">Architecture</div>
+      <div class="skill-cell-items">Multi-tenant SaaS<br>API Ecosystem Design<br>Microservices<br>Azure · DevOps</div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-label">Personal Projects</div>
+  <h2>Six things I built in my own time.</h2>
+  <p class="section-intro">A deliberate investment in hands-on engineering over the past year — spanning fintech AI, property management, inventory SaaS, and consumer apps.</p>
+
+  <div class="projects-list">
+
+    <div class="project-item">
+      <div class="project-meta">
+        <div class="project-number">01 · AI · FinTech</div>
+        <div class="project-name">AI Summariser</div>
+        <span class="project-status status-poc"><span class="status-dot"></span>Proof of Concept</span>
+        <div class="project-desc">Local AI summarisation and document verification microservice for financial services. Two backends: Python/FastAPI with llama-cpp and Metal GPU acceleration (Gemma 4 GGUF), and a Node.js/Ollama service with PDF export. Runs entirely offline — built for regulated environments where data can't leave the network. Domain-specific prompt types cover mortgage applications, valuation reports, offer conditions, and payslip verification. PoC stage; production path depends on use-case sign-off.</div>
+        <div class="project-stack">
+          <span class="stack-tag">Python</span><span class="stack-tag">FastAPI</span><span class="stack-tag">Node.js</span><span class="stack-tag">Ollama</span><span class="stack-tag">Gemma 4</span><span class="stack-tag">llama-cpp</span><span class="stack-tag">Docker</span>
+        </div>
+      </div>
+      <a href="https://github.com/mohitchimote/ai-summariser" target="_blank" class="project-link">GitHub ↗</a>
+    </div>
+
+    <div class="project-item">
+      <div class="project-meta">
+        <div class="project-number">02 · AI · FinTech</div>
+        <div class="project-name">AI Affordability</div>
+        <span class="project-status status-poc"><span class="status-dot"></span>Proof of Concept</span>
+        <div class="project-desc">AI-assisted affordability assessment microservice for mortgage lending. Node.js backend with a static HTML frontend, designed to plug into an existing origination workflow rather than stand alone. Early-stage prototype exploring what AI-augmented affordability assessment could look like in practice.</div>
+        <div class="project-stack">
+          <span class="stack-tag">Node.js</span><span class="stack-tag">JavaScript</span><span class="stack-tag">HTML</span>
+        </div>
+      </div>
+      <a href="https://github.com/mohitchimote/ai-affordability" target="_blank" class="project-link">GitHub ↗</a>
+    </div>
+
+    <div class="project-item">
+      <div class="project-meta">
+        <div class="project-number">03 · B2B SaaS</div>
+        <div class="project-name">InventPro</div>
+        <span class="project-status status-live"><span class="status-dot"></span>Live</span>
+        <div class="project-desc">Cloud-first multi-tenant inventory and billing management platform, currently in use by a small retail business. Separate tenant app, superadmin portal, and marketing site — all on Cloudflare Pages. JWT + OTP authentication, transactional email via Resend, and GitHub Actions for CI/CD.</div>
+        <div class="project-stack">
+          <span class="stack-tag">JavaScript</span><span class="stack-tag">Cloudflare Workers</span><span class="stack-tag">Cloudflare D1</span><span class="stack-tag">Cloudflare Pages</span><span class="stack-tag">Resend</span><span class="stack-tag">GitHub Actions</span>
+        </div>
+      </div>
+      <a href="https://github.com/mohitchimote/InventPro" target="_blank" class="project-link">GitHub ↗</a>
+    </div>
+
+    <div class="project-item">
+      <div class="project-meta">
+        <div class="project-number">04 · PropTech</div>
+        <div class="project-name">Letwise UK</div>
+        <span class="project-status status-live"><span class="status-dot"></span>Live</span>
+        <div class="project-desc">UK property rental management application, in active use by a portfolio landlord managing multiple properties. React/TypeScript SPA with a Supabase backend, PLpgSQL migrations, and a Cloudflare Worker for edge API calls. Separate dev and production environments, 145 commits. Built to a real brief for a real user.</div>
+        <div class="project-stack">
+          <span class="stack-tag">React</span><span class="stack-tag">TypeScript</span><span class="stack-tag">Supabase</span><span class="stack-tag">PLpgSQL</span><span class="stack-tag">Cloudflare Workers</span><span class="stack-tag">Vite</span>
+        </div>
+      </div>
+      <a href="https://github.com/mohitchimote/letwise-uk" target="_blank" class="project-link">GitHub ↗</a>
+    </div>
+
+    <div class="project-item">
+      <div class="project-meta">
+        <div class="project-number">05 · Consumer</div>
+        <div class="project-name">Life Partner Seek</div>
+        <span class="project-status status-built"><span class="status-dot"></span>Built · Awaiting operator</span>
+        <div class="project-desc">A matchmaking platform built for a proposed marriage bureau — complete and deployable, waiting for its operator to launch. React/TypeScript with Supabase and 167 commits. Interesting for the role-based visibility architecture: a deliberate application of enterprise RBAC thinking to a consumer product.</div>
+        <div class="project-stack">
+          <span class="stack-tag">React</span><span class="stack-tag">TypeScript</span><span class="stack-tag">Supabase</span><span class="stack-tag">PLpgSQL</span><span class="stack-tag">shadcn/ui</span><span class="stack-tag">Tailwind</span>
+        </div>
+      </div>
+      <a href="https://github.com/mohitchimote/life-partner-seek" target="_blank" class="project-link">GitHub ↗</a>
+    </div>
+
+    <div class="project-item">
+      <div class="project-meta">
+        <div class="project-number">06 · Personal FinTech</div>
+        <div class="project-name">Clinic Pay Tracker</div>
+        <span class="project-status status-live"><span class="status-dot"></span>Live</span>
+        <div class="project-desc">Pay tracking and monthly invoicing tool for a self-employed dental specialist in London. Live at pay.drmonica.in. GitHub Pages frontend, Cloudflare Worker REST API, Cloudflare D1 database, password-protected, custom domain. Small in scope — but shipped, in daily use, solving a real problem.</div>
+        <div class="project-stack">
+          <span class="stack-tag">HTML</span><span class="stack-tag">JavaScript</span><span class="stack-tag">Cloudflare Workers</span><span class="stack-tag">Cloudflare D1</span><span class="stack-tag">GitHub Pages</span>
+        </div>
+      </div>
+      <a href="https://github.com/mohitchimote/clinic-tracker" target="_blank" class="project-link">GitHub ↗</a>
+    </div>
+
+  </div>
+</section>
+
+<section id="work">
+  <div class="section-label">Work</div>
+  <h2>TCS since 2012. One domain, five roles.</h2>
+  <p class="section-intro">Every role has been in financial services. The arc runs from delivery and QA through implementation, presales, product leadership, and into AI-augmented product management.</p>
+
+  <div class="work-company-name">Tata Consultancy Services &nbsp;·&nbsp; July 2012 – Present</div>
+
+  <div class="work-timeline">
+
+    <div class="work-phase">
+      <div class="work-phase-header">
+        <span class="work-phase-role">Product Manager</span>
+        <span class="work-phase-period">Sep 2021 – Present</span>
+      </div>
+      <ul class="work-phase-points">
+        <li>Leading product management for TCS DigiHome — a digital mortgage origination platform for UK banks and building societies — overseeing a team of UI/UX designers, product owners, business analysts, and developers</li>
+        <li>Providing technical consulting and digital transformation strategy to UK lenders, including high street banks and building societies</li>
+        <li>Designed and built a local AI summarisation microservice (sovereign private cloud, offline LLM inference) addressing FCA data residency requirements; architected a multi-agent DIP pipeline using a ReAct loop in Node.js</li>
+        <li>Creating product roadmaps, defining go-to-market strategies, and leading design thinking workshops across multiple geographies and user personas</li>
+        <li>Owning API specifications, third-party ecosystem integrations, backlog refinement, and end-to-end product lifecycle management</li>
+        <li>Leading all sales pursuits — RFI/RFP responses, customer demos, and consultative workshops</li>
+        <li>Key achievement: <span class="work-stat">improved straight-through processing from 30% to 65%</span>, reducing average end-to-end mortgage cycle time <span class="work-stat">from 35 to 13 days</span></li>
+      </ul>
+    </div>
+
+    <div class="work-phase">
+      <div class="work-phase-header">
+        <span class="work-phase-role">Product Lead</span>
+        <span class="work-phase-period">Jun 2020 – Sep 2021</span>
+      </div>
+      <ul class="work-phase-points">
+        <li>Led a product team building a full-suite Loan Origination Platform from scratch — covering the end-to-end mortgage lifecycle from sales through underwriting to funds disbursement</li>
+        <li>Owned the product development roadmap, sprint deliveries, analysis, testing, and release management</li>
+        <li>Played a key role in registering the solution as TCS Intellectual Property</li>
+        <li>Delivered 7 functional modules across front office, back office, and customer personas; integrated with a market-leading decision engine and <span class="work-stat">12 third-party interfaces</span>; <span class="work-stat">100% of roadmap commitments delivered on time</span></li>
+      </ul>
+    </div>
+
+    <div class="work-phase">
+      <div class="work-phase-header">
+        <span class="work-phase-role">Presales Consultant</span>
+        <span class="work-phase-period">Oct 2018 – Jun 2020</span>
+      </div>
+      <ul class="work-phase-points">
+        <li>Led presales pursuits for Engineering and IoT services across the UK, qualifying and managing multi-million dollar deals</li>
+        <li>Executed RFI/RFP responses, conducted market research, and defined go-to-market strategies for UK prospects</li>
+        <li>Recognised for outstanding contributions in the Transcend Presales programme, July 2021</li>
+      </ul>
+    </div>
+
+    <div class="work-phase">
+      <div class="work-phase-header">
+        <span class="work-phase-role">Implementation Lead — LOS</span>
+        <span class="work-phase-period">Apr 2015 – Sep 2018</span>
+      </div>
+      <ul class="work-phase-points">
+        <li>IT delivery management for a prominent US mortgage lender — leading QA and development teams through Agile sprint cycles</li>
+        <li>Formulated test strategies, implemented automation for web applications, and owned business analysis requirements including BRD/FRD</li>
+        <li>Contributed to <span class="work-stat">90% paperless processing</span> of mortgage loans and significant cycle time reduction across the origination workflow</li>
+      </ul>
+    </div>
+
+    <div class="work-phase">
+      <div class="work-phase-header">
+        <span class="work-phase-role">Programme Management Office Lead</span>
+        <span class="work-phase-period">Jul 2012 – Mar 2015</span>
+      </div>
+      <ul class="work-phase-points">
+        <li>Foundation role covering programme delivery, quality assurance, and business analysis for large financial services accounts in North America</li>
+        <li>Recognised as part of the TCS Inspire Programme for High-Potential Associates — first batch 2018–2020</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div style="margin-top:3rem">
+    <div class="section-label">Certifications</div>
+    <div class="certs-grid">
+      <div class="cert-item"><div class="cert-issuer">Microsoft</div>Azure Fundamentals &amp; Azure Administrator</div>
+      <div class="cert-item"><div class="cert-issuer">University of Helsinki</div>Elements of AI</div>
+      <div class="cert-item"><div class="cert-issuer">PMI</div>Technology for Product Managers</div>
+      <div class="cert-item"><div class="cert-issuer">IIBA</div>Business Analysis Foundations</div>
+      <div class="cert-item"><div class="cert-issuer">IIBA / PMI</div>Agile Product Owner Role</div>
+      <div class="cert-item"><div class="cert-issuer">NASBA</div>Consulting Foundations: Client Management</div>
+    </div>
+  </div>
+
+  <div style="margin-top:2rem;padding:1.25rem;border:1px solid var(--rule);border-radius:3px;">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--amber);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.4rem;">Published</div>
+    <a href="https://www.tcs.com/what-we-do/industries/banking/white-paper/uk-seamless-digital-mortgage-experience" target="_blank" style="font-size:13.5px;color:var(--text-2);transition:color 0.2s;" onmouseover="this.style.color='#C8922A'" onmouseout="this.style.color='#9AA0AC'">
+      UK Seamless Digital Mortgage Experience — TCS White Paper ↗
+    </a>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-label">Contact</div>
+  <h2>Let's talk.</h2>
+  <div class="contact-block">
+    <p class="contact-line">I'm open to conversations about senior product and architecture roles in UK fintech, applied AI in regulated financial services, and select consulting engagements. Not actively looking — but always willing to have the right conversation.</p>
+    <div class="contact-links">
+      <a href="https://linkedin.com/in/mohitchimote-3b312663" target="_blank" class="contact-link">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+      <a href="https://github.com/mohitchimote" target="_blank" class="contact-link">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+        GitHub
+      </a>
+      <a href="mailto:mohit.chimote@gmail.com" class="contact-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        mohit.chimote@gmail.com
+      </a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <p>© 2026 Mohit Chimote · London, UK</p>
+  <p style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-3)">mohitchimote.com</p>
+</footer>
+
+</body>
+</html>
