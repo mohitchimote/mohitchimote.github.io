@@ -51,21 +51,43 @@ const cleanup = () => {
   preview.kill();
 };
 
+function withTimeout(promise, ms, label) {
+  let timer;
+  const timeout = new Promise((_, reject) => {
+    timer = setTimeout(() => reject(new Error(`Timed out after ${ms}ms: ${label}`)), ms);
+  });
+  return Promise.race([promise, timeout]).finally(() => clearTimeout(timer));
+}
+
 try {
   await waitForServer(`${baseUrl}/portfolio`);
 
-  const browser = await chromium.launch();
+  // --no-sandbox is required in containerized CI runners (e.g. GitHub Actions),
+  // where Chromium's sandbox can't initialize and would otherwise hang silently.
+  const browser = await withTimeout(
+    chromium.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] }),
+    30000,
+    'chromium.launch()'
+  );
   const page = await browser.newPage();
-  await page.goto(`${baseUrl}/portfolio`, { waitUntil: 'networkidle' });
+  await withTimeout(
+    page.goto(`${baseUrl}/portfolio`, { waitUntil: 'load', timeout: 30000 }),
+    35000,
+    'page.goto(/portfolio)'
+  );
   await page.emulateMedia({ media: 'print' });
 
   mkdirSync(dirname(outPath), { recursive: true });
-  await page.pdf({
-    path: outPath,
-    format: 'A4',
-    printBackground: true,
-    margin: { top: '14mm', bottom: '14mm', left: '12mm', right: '12mm' },
-  });
+  await withTimeout(
+    page.pdf({
+      path: outPath,
+      format: 'A4',
+      printBackground: true,
+      margin: { top: '14mm', bottom: '14mm', left: '12mm', right: '12mm' },
+    }),
+    30000,
+    'page.pdf()'
+  );
 
   await browser.close();
   console.log(`✓ Exported ${outPath}`);
