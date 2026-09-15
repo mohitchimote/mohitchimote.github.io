@@ -17,6 +17,7 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -33,8 +34,13 @@ jobs:
       - name: Install Playwright's Chromium
         run: npx playwright install --with-deps chromium
 
-      - name: Build site, sitemap, and PDF
-        run: npm run build:pdf
+      - name: Build site and sitemap
+        run: npm run build
+        timeout-minutes: 3
+
+      - name: Export PDF
+        run: npm run export-pdf
+        timeout-minutes: 3
 
       - name: Configure Pages
         uses: actions/configure-pages@v5
@@ -47,6 +53,7 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

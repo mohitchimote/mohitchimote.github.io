@@ -26,10 +26,16 @@ function waitForServer(url, timeoutMs = 20000) {
   return new Promise((resolve, reject) => {
     const attempt = async () => {
       try {
-        const res = await fetch(url);
-        if (res.ok) return resolve();
+        const controller = new AbortController();
+        const abortTimer = setTimeout(() => controller.abort(), 2000);
+        try {
+          const res = await fetch(url, { signal: controller.signal });
+          if (res.ok) return resolve();
+        } finally {
+          clearTimeout(abortTimer);
+        }
       } catch {
-        // server not up yet
+        // not up yet, or this attempt timed out — retry below
       }
       if (Date.now() - start > timeoutMs) return reject(new Error(`Timed out waiting for ${url}`));
       setTimeout(attempt, 300);
@@ -60,7 +66,7 @@ function withTimeout(promise, ms, label) {
 }
 
 try {
-  await waitForServer(`${baseUrl}/portfolio`);
+  await withTimeout(waitForServer(`${baseUrl}/portfolio`), 25000, 'waitForServer()');
 
   // --no-sandbox is required in containerized CI runners (e.g. GitHub Actions),
   // where Chromium's sandbox can't initialize and would otherwise hang silently.
@@ -99,3 +105,9 @@ try {
 } finally {
   cleanup();
 }
+
+// Force-exit: npx's process tree (it can spawn astro as a grandchild) doesn't
+// always die cleanly from preview.kill() in containerized CI, which would
+// otherwise leave an open stdio handle keeping this script alive indefinitely
+// even after everything above has actually finished.
+process.exit(process.exitCode ?? 0);
