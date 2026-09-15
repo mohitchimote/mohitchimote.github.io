@@ -1,0 +1,99 @@
+---
+import { marked } from 'marked';
+import type { CollectionEntry } from 'astro:content';
+import BaseLayout from './BaseLayout.astro';
+import StatusBadge from '../components/StatusBadge.astro';
+import StackTags from '../components/StackTags.astro';
+import CodeSnippet from '../components/CodeSnippet.astro';
+import AiCallout from '../components/AiCallout.astro';
+import Screenshot from '../components/Screenshot.astro';
+
+interface Props {
+  entry: CollectionEntry<'work'>;
+}
+
+const { entry } = Astro.props;
+const {
+  title, summary, status, statusLabel, statusNote,
+  users, role, problem, architecture, outcome,
+  stack, aiFeatures, diagram, codeSnippet, screenshots, links,
+} = entry.data;
+---
+<BaseLayout title={`${title} — Mohit Chimote`} description={summary}>
+
+  <section class="case-hero">
+    <div class="breadcrumb"><a href="/">Mohit Chimote</a> / <a href="/#projects">Work</a> / {title}</div>
+    <h1 class="case-title">{title}</h1>
+    <p class="case-summary">{summary}</p>
+    <div class="case-status-row">
+      <StatusBadge status={status} label={statusLabel} />
+      {statusNote && <span class="status-note">{statusNote}</span>}
+    </div>
+    <div class="case-links">
+      {links.live && <a href={links.live} target="_blank" rel="noopener" class="btn btn-primary">Live site ↗</a>}
+      {links.repo && <a href={links.repo} target="_blank" rel="noopener" class="btn btn-ghost">GitHub ↗</a>}
+      {links.repos && links.repos.map((r) => (
+        <a href={r.url} target="_blank" rel="noopener" class="btn btn-ghost">{r.label} ↗</a>
+      ))}
+    </div>
+  </section>
+
+  <section class="case-section">
+    <div class="case-section-label">Problem</div>
+    <div class="case-body" set:html={marked.parse(problem)} />
+  </section>
+
+  <section class="case-section">
+    <div class="case-section-label">Intended Users</div>
+    <div class="case-body"><p>{users}</p></div>
+  </section>
+
+  <section class="case-section">
+    <div class="case-section-label">My Role</div>
+    <div class="case-body"><p>{role}</p></div>
+  </section>
+
+  <section class="case-section">
+    <div class="case-section-label">Architecture &amp; Stack</div>
+    <StackTags stack={stack} />
+    {diagram && (
+      <figure class="arch-diagram">
+        <div set:html={diagram.svg} />
+        {diagram.caption && <figcaption class="arch-diagram-caption">{diagram.caption}</figcaption>}
+      </figure>
+    )}
+    <div class="case-body" style="margin-top:1.5rem" set:html={marked.parse(architecture)} />
+    {aiFeatures && aiFeatures.map((feature) => (
+      <AiCallout title={feature.title} description={feature.description} />
+    ))}
+  </section>
+
+  {codeSnippet && (
+    <section class="case-section">
+      <div class="case-section-label">Code Snippet</div>
+      <CodeSnippet file={codeSnippet.file} lang={codeSnippet.lang} code={codeSnippet.code} repoUrl={codeSnippet.repoUrl} />
+    </section>
+  )}
+
+  {screenshots.length > 0 && (
+    <section class="case-section">
+      <div class="case-section-label">Screenshots</div>
+      <div class="screenshots-grid">
+        {screenshots.map((shot) => (
+          <Screenshot src={shot.src} alt={shot.alt} caption={shot.caption} placeholder={shot.placeholder} />
+        ))}
+      </div>
+    </section>
+  )}
+
+  <section class="case-section">
+    <div class="case-section-label">Outcome</div>
+    <div class="case-body outcome-box" set:html={marked.parse(outcome)} />
+  </section>
+
+  <nav class="case-nav">
+    <a href="/#projects" class="btn btn-ghost">&larr; All projects</a>
+    {links.repo && <a href={links.repo} target="_blank" rel="noopener" class="btn btn-ghost">View repo ↗</a>}
+  </nav>
+
+</BaseLayout>

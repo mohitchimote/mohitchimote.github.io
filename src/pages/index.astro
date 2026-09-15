@@ -1,0 +1,203 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+
+const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
+
+const categories: Record<string, string> = {
+  'inventpro': 'B2B SaaS',
+  'journey-los': 'FinTech · LOS',
+  'letwise-uk': 'PropTech',
+  'clinic-tracker': 'Personal FinTech',
+  'life-partner-seek': 'Consumer',
+  'ai-gemma-tools': 'AI · FinTech',
+};
+---
+<BaseLayout
+  title="Mohit Chimote — FinTech Product & Architecture"
+  description="Mohit Chimote — Product Manager and architect in UK regulated financial services. 13 years at TCS building mortgage origination platforms, AI systems, and digital lending products."
+>
+
+<section class="hero" id="top">
+  <p class="hero-eyebrow">London, UK &nbsp;·&nbsp; Product Manager · FinTech · TCS</p>
+  <h1>Solving complex mortgage<br>problems — AI just made<br>me better at it nowadays.</h1>
+  <p class="hero-line">
+    I'm a product manager and architect at TCS, where I've spent over a decade building and delivering digital mortgage origination platforms for UK banks and building societies. Lately I've been going deeper into applied AI and hands-on engineering — designing local LLM inference systems, building edge-native SaaS products, and shipping things that actually run.
+  </p>
+  <div class="tags">
+    <span class="tag">[ UK Mortgage Origination ]</span>
+    <span class="tag">[ Applied AI ]</span>
+    <span class="tag">[ Product Management ]</span>
+    <span class="tag">[ FCA · MCOB · Consumer Duty ]</span>
+    <span class="tag">[ Edge-Native SaaS ]</span>
+  </div>
+  <div class="cta-row">
+    <a href="#work" class="btn btn-primary">My experience</a>
+    <a href="#projects" class="btn btn-ghost">Personal projects</a>
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-label">About</div>
+  <h2>Domain depth meets hands-on engineering.</h2>
+  <div class="about-body">
+    <p>I joined TCS in 2012 as a graduate and have spent 13 years across programme delivery, implementation, presales, and product management — all in financial services, and predominantly in UK mortgage lending. I know this domain properly: the regulatory landscape, the lender economics, the broker relationships, the processing bottlenecks, and where technology can genuinely move the needle.</p>
+    <p>Over the past couple of years I've been investing deliberately in hands-on engineering. I wanted to close the gap between designing systems and building them — so I built a local LLM inference microservice for financial services document processing, architected a multi-agent underwriting pipeline, and shipped several personal SaaS products across different domains. Some are live with real users. Some are proof-of-concepts exploring what's feasible.</p>
+    <p>I hold a <span class="about-highlight">BEng in Computer Science &amp; Engineering</span>, a <span class="about-highlight">PG Diploma in Management</span> from Welingkar, and am <span class="about-highlight">Microsoft Azure certified</span>. I'm based in <span class="about-highlight">Grays, Essex</span> and work across London.</p>
+  </div>
+
+  <div class="skills-grid">
+    <div class="skill-cell">
+      <div class="skill-cell-label">Domain</div>
+      <div class="skill-cell-items">UK Mortgage Lending<br>FCA · MCOB · Consumer Duty<br>Loan Origination Systems<br>Open Banking</div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-cell-label">Product</div>
+      <div class="skill-cell-items">Product Roadmapping<br>Backlog &amp; Sprint Delivery<br>User Journey Design<br>RFI / RFP · Presales</div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-cell-label">AI / Engineering</div>
+      <div class="skill-cell-items">Local LLM · Ollama · Gemma<br>FastAPI · Node.js · Python<br>React · TypeScript<br>Cloudflare · Supabase</div>
+    </div>
+    <div class="skill-cell">
+      <div class="skill-cell-label">Architecture</div>
+      <div class="skill-cell-items">Multi-tenant SaaS<br>API Ecosystem Design<br>Microservices<br>Azure · DevOps</div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-label">Personal Projects</div>
+  <h2>Six things I built in my own time.</h2>
+  <p class="section-intro">A deliberate investment in hands-on engineering over the past year — spanning fintech AI, property management, inventory SaaS, and consumer apps. Most started as a real brief for someone I know, built to the same standard as any commercial product.</p>
+
+  <div class="projects-list">
+    {work.map((entry) => (
+      <ProjectCard entry={entry} category={categories[entry.slug] ?? ''} />
+    ))}
+  </div>
+</section>
+
+<section id="work">
+  <div class="section-label">Work</div>
+  <h2>TCS since 2012. One domain, five roles.</h2>
+  <p class="section-intro">Every role has been in financial services. The arc runs from delivery and QA through implementation, presales, product leadership, and into AI-augmented product management.</p>
+
+  <div class="work-company-name">Tata Consultancy Services &nbsp;·&nbsp; July 2012 – Present</div>
+
+  <div class="work-timeline">
+
+    <div class="work-phase">
+      <div class="work-phase-header">
+        <span class="work-phase-role">Product Manager</span>
+        <span class="work-phase-period">Sep 2021 – Present</span>
+      </div>
+      <ul class="work-phase-points">
+        <li>Leading product management for TCS DigiHome — a digital mortgage origination platform for UK banks and building societies — overseeing a team of UI/UX designers, product owners, business analysts, and developers</li>
+        <li>Providing technical consulting and digital transformation strategy to UK lenders, including high street banks and building societies</li>
+        <li>Designed and built a local AI summarisation microservice (sovereign private cloud, offline LLM inference) addressing FCA data residency requirements; architected a multi-agent DIP pipeline using a ReAct loop in Node.js</li>
+        <li>Creating product roadmaps, defining go-to-market strategies, and leading design thinking workshops across multiple geographies and user personas</li>
+        <li>Owning API specifications, third-party ecosystem integrations, backlog refinement, and end-to-end product lifecycle management</li>
+        <li>Leading all sales pursuits — RFI/RFP responses, customer demos, and consultative workshops</li>
+        <li>Key achievement: <span class="work-stat">improved straight-through processing from 30% to 65%</span>, reducing average end-to-end mortgage cycle time <span class="work-stat">from 35 to 13 days</span></li>
+      </ul>
+    </div>
+
+    <div class="work-phase">
+      <div class="work-phase-header">
+        <span class="work-phase-role">Product Lead</span>
+        <span class="work-phase-period">Jun 2020 – Sep 2021</span>
+      </div>
+      <ul class="work-phase-points">
+        <li>Led a product team building a full-suite Loan Origination Platform from scratch — covering the end-to-end mortgage lifecycle from sales through underwriting to funds disbursement</li>
+        <li>Owned the product development roadmap, sprint deliveries, analysis, testing, and release management</li>
+        <li>Played a key role in registering the solution as TCS Intellectual Property</li>
+        <li>Delivered 7 functional modules across front office, back office, and customer personas; integrated with a market-leading decision engine and <span class="work-stat">12 third-party interfaces</span>; <span class="work-stat">100% of roadmap commitments delivered on time</span></li>
+      </ul>
+    </div>
+
+    <div class="work-phase">
+      <div class="work-phase-header">
+        <span class="work-phase-role">Presales Consultant</span>
+        <span class="work-phase-period">Oct 2018 – Jun 2020</span>
+      </div>
+      <ul class="work-phase-points">
+        <li>Led presales pursuits for Engineering and IoT services across the UK, qualifying and managing multi-million dollar deals</li>
+        <li>Executed RFI/RFP responses, conducted market research, and defined go-to-market strategies for UK prospects</li>
+        <li>Recognised for outstanding contributions in the Transcend Presales programme, July 2021</li>
+      </ul>
+    </div>
+
+    <div class="work-phase">
+      <div class="work-phase-header">
+        <span class="work-phase-role">Implementation Lead — LOS</span>
+        <span class="work-phase-period">Apr 2015 – Sep 2018</span>
+      </div>
+      <ul class="work-phase-points">
+        <li>IT delivery management for a prominent US mortgage lender — leading QA and development teams through Agile sprint cycles</li>
+        <li>Formulated test strategies, implemented automation for web applications, and owned business analysis requirements including BRD/FRD</li>
+        <li>Contributed to <span class="work-stat">90% paperless processing</span> of mortgage loans and significant cycle time reduction across the origination workflow</li>
+      </ul>
+    </div>
+
+    <div class="work-phase">
+      <div class="work-phase-header">
+        <span class="work-phase-role">Programme Management Office Lead</span>
+        <span class="work-phase-period">Jul 2012 – Mar 2015</span>
+      </div>
+      <ul class="work-phase-points">
+        <li>Foundation role covering programme delivery, quality assurance, and business analysis for large financial services accounts in North America</li>
+        <li>Recognised as part of the TCS Inspire Programme for High-Potential Associates — first batch 2018–2020</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div style="margin-top:3rem">
+    <div class="section-label">Certifications</div>
+    <div class="certs-grid">
+      <div class="cert-item"><div class="cert-issuer">Microsoft</div>Azure Fundamentals &amp; Azure Administrator</div>
+      <div class="cert-item"><div class="cert-issuer">University of Helsinki</div>Elements of AI</div>
+      <div class="cert-item"><div class="cert-issuer">PMI</div>Technology for Product Managers</div>
+      <div class="cert-item"><div class="cert-issuer">IIBA</div>Business Analysis Foundations</div>
+      <div class="cert-item"><div class="cert-issuer">IIBA / PMI</div>Agile Product Owner Role</div>
+      <div class="cert-item"><div class="cert-issuer">NASBA</div>Consulting Foundations: Client Management</div>
+    </div>
+  </div>
+
+  <div style="margin-top:2rem;padding:1.25rem;border:1px solid var(--rule);border-radius:3px;">
+    <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--amber);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.4rem;">Published</div>
+    <a href="https://www.tcs.com/what-we-do/industries/banking/white-paper/uk-seamless-digital-mortgage-experience" target="_blank" style="font-size:13.5px;color:var(--text-2);transition:color 0.2s;">
+      UK Seamless Digital Mortgage Experience — TCS White Paper ↗
+    </a>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-label">Contact</div>
+  <h2>Let's talk.</h2>
+  <div class="contact-block">
+    <p class="contact-line">I'm open to conversations about senior product and architecture roles in UK fintech, applied AI in regulated financial services, and select consulting engagements. Not actively looking — but always willing to have the right conversation.</p>
+    <div class="contact-links">
+      <a href="/mohit-chimote-portfolio.pdf" download class="contact-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download portfolio (PDF)
+      </a>
+      <a href="https://www.linkedin.com/in/mohitchimote/" target="_blank" class="contact-link">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+      <a href="https://github.com/mohitchimote" target="_blank" class="contact-link">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+        GitHub
+      </a>
+      <a href="mailto:mohit.chimote@gmail.com" class="contact-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        mohit.chimote@gmail.com
+      </a>
+    </div>
+  </div>
+</section>
+
+</BaseLayout>

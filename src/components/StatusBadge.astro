@@ -1,0 +1,21 @@
+---
+interface Props {
+  status: 'live' | 'poc' | 'built';
+  label?: string;
+}
+
+const { status, label } = Astro.props;
+
+const defaults: Record<Props['status'], string> = {
+  live: 'Live',
+  poc: 'Proof of Concept',
+  built: 'Built · Awaiting operator',
+};
+
+const classes: Record<Props['status'], string> = {
+  live: 'status-live',
+  poc: 'status-poc',
+  built: 'status-built',
+};
+---
+<span class={`project-status ${classes[status]}`}><span class="status-dot"></span>{label ?? defaults[status]}</span>

@@ -1,0 +1,28 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import StatusBadge from './StatusBadge.astro';
+import StackTags from './StackTags.astro';
+
+interface Props {
+  entry: CollectionEntry<'work'>;
+  category: string;
+}
+
+const { entry, category } = Astro.props;
+const { title, summary, status, statusLabel, stack, links } = entry.data;
+---
+<div class="project-item">
+  <div class="project-meta">
+    <div class="project-category">{category}</div>
+    <div class="project-name">{title}</div>
+    <StatusBadge status={status} label={statusLabel} />
+    <div class="project-desc">{summary}</div>
+    <StackTags stack={stack} />
+  </div>
+  <div class="project-links">
+    <a href={`/work/${entry.slug}/`} class="project-link">Case study</a>
+    {(links.repo || links.repos?.[0]?.url) && (
+      <a href={links.repo ?? links.repos![0].url} target="_blank" rel="noopener" class="project-link">GitHub ↗</a>
+    )}
+  </div>
+</div>

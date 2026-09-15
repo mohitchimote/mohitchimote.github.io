@@ -1,0 +1,136 @@
+---
+import { getCollection } from 'astro:content';
+import { marked } from 'marked';
+import { Code } from 'astro:components';
+import type { CodeLanguage } from 'astro';
+import '../styles/print.css';
+
+const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
+
+const statusLabels: Record<string, string> = { live: 'Live', poc: 'Proof of Concept', built: 'Built · Awaiting operator' };
+const statusClass: Record<string, string> = { live: 'badge-live', poc: 'badge-poc', built: 'badge-built' };
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mohit Chimote — Portfolio</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<section class="cover">
+  <div class="cover-name">Mohit Chimote</div>
+  <div class="cover-role">Product Manager &amp; Architect — UK Regulated Financial Services</div>
+  <p class="cover-line">
+    13 years at TCS building digital mortgage origination platforms for UK banks and building societies. This document collects six personal engineering projects — case studies in architecture, not just descriptions of what they do.
+  </p>
+  <div class="cover-contact">
+    <span>mohit.chimote@gmail.com</span>
+    <span>linkedin.com/in/mohitchimote</span>
+    <span>github.com/mohitchimote</span>
+    <span>mohitchimote.com</span>
+  </div>
+</section>
+
+<nav class="toc">
+  <div class="toc-label">Contents</div>
+  <ul class="toc-list">
+    {work.map((entry) => (
+      <li><span class="toc-title">{entry.data.title}</span><span>{statusLabels[entry.data.status]}</span></li>
+    ))}
+  </ul>
+</nav>
+
+{work.map((entry) => {
+  const { title, summary, status, statusLabel, statusNote, users, role, problem, architecture, outcome, stack, aiFeatures, diagram, codeSnippet, screenshots, links } = entry.data;
+  return (
+    <article class="project">
+      <header class="project-header">
+        <h1 class="project-title">{title}</h1>
+        <p class="project-summary">{summary}</p>
+        <div class="project-meta-row">
+          <span class={`badge ${statusClass[status]}`}><span class="badge-dot" /> {statusLabel ?? statusLabels[status]}</span>
+          {links.live && <span class="link-text">{links.live.replace(/^https?:\/\//, '')}</span>}
+          {links.repo && <span class="link-text">{links.repo.replace(/^https:\/\/github\.com\//, 'github.com/')}</span>}
+          {links.repos && links.repos.map((r) => <span class="link-text">{r.label}: {r.url.replace(/^https:\/\/github\.com\//, 'github.com/')}</span>)}
+        </div>
+        {statusNote && <p class="section-body" style="margin-top:0.6rem"><strong>{statusNote}</strong></p>}
+      </header>
+
+      <div class="section">
+        <div class="section-label">Problem</div>
+        <div class="section-body" set:html={marked.parse(problem)} />
+      </div>
+
+      <div class="section">
+        <div class="section-label">Intended Users</div>
+        <div class="section-body"><p>{users}</p></div>
+      </div>
+
+      <div class="section">
+        <div class="section-label">My Role</div>
+        <div class="section-body"><p>{role}</p></div>
+      </div>
+
+      <div class="section">
+        <div class="section-label">Architecture &amp; Stack</div>
+        <div class="stack-row">
+          {stack.map((s) => <span class="stack-tag">{s}</span>)}
+        </div>
+        {diagram && (
+          <div class="diagram-wrap">
+            <div set:html={diagram.svg} />
+            {diagram.caption && <div class="diagram-caption">{diagram.caption}</div>}
+          </div>
+        )}
+        <div class="section-body" set:html={marked.parse(architecture)} />
+        {aiFeatures && aiFeatures.map((f) => (
+          <div class="outcome-block" style="margin-top:0.75rem">
+            <strong>{f.title}</strong>
+            <p style="margin-top:0.3rem;font-size:0.85rem;color:var(--text-2)">{f.description}</p>
+          </div>
+        ))}
+      </div>
+
+      {codeSnippet && (
+        <div class="section">
+          <div class="section-label">Code Snippet</div>
+          <div class="code-block">
+            <div class="code-block-header">
+              <span>{codeSnippet.file}</span>
+              <span>{codeSnippet.lang}</span>
+            </div>
+            <Code code={codeSnippet.code.trimEnd()} lang={codeSnippet.lang as CodeLanguage} theme="github-light" />
+          </div>
+        </div>
+      )}
+
+      {screenshots.filter((s) => !s.placeholder).length > 0 && (
+        <div class="section">
+          <div class="section-label">Screenshots</div>
+          <div class="shots-row">
+            {screenshots.filter((s) => !s.placeholder).map((s) => (
+              <div class="shot-frame">
+                <img src={s.src} alt={s.alt} />
+                {s.caption && <div class="shot-caption">{s.caption}</div>}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      <div class="section">
+        <div class="section-label">Outcome</div>
+        <div class="section-body outcome-block" set:html={marked.parse(outcome)} />
+      </div>
+    </article>
+  );
+})}
+
+</body>
+</html>

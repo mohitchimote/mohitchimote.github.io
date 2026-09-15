@@ -1,0 +1,10 @@
+---
+interface Props {
+  stack: string[];
+}
+
+const { stack } = Astro.props;
+---
+<div class="project-stack">
+  {stack.map((item) => <span class="stack-tag">{item}</span>)}
+</div>

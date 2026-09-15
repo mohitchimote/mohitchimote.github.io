@@ -1,0 +1,24 @@
+{
+  "name": "mohitchimote-portfolio",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "export-pdf": "node scripts/export-pdf.mjs",
+    "build:pdf": "npm run build && npm run export-pdf"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.2.1",
+    "astro": "^5.2.5",
+    "marked": "^18.0.13"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "playwright": "^1.63.0",
+    "typescript": "^5.7.3"
+  }
+}

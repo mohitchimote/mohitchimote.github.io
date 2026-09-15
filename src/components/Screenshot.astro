@@ -1,0 +1,21 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  caption?: string;
+  placeholder?: boolean;
+}
+
+const { src, alt, caption, placeholder } = Astro.props;
+---
+<div class="screenshot-frame">
+  {placeholder ? (
+    <div class="screenshot-placeholder">
+      <span class="screenshot-placeholder-label">Screenshot pending</span>
+      <span class="screenshot-placeholder-label">{src}</span>
+    </div>
+  ) : (
+    <img src={src} alt={alt} loading="lazy" />
+  )}
+  {caption && <div class="screenshot-caption">{caption}</div>}
+</div>
