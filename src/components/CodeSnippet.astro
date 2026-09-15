@@ -15,7 +15,7 @@ const { file, lang, code, repoUrl } = Astro.props;
   <div class="code-snippet-header">
     <span class="code-snippet-file">
       {file}
-      {repoUrl && <> &middot; <a href={repoUrl} target="_blank" rel="noopener" style="color:var(--amber)">view on GitHub ↗</a></>}
+      {repoUrl && <> &middot; <a href={repoUrl} target="_blank" rel="noopener" style="color:var(--code-amber)">view on GitHub ↗</a></>}
     </span>
     <span class="code-snippet-lang">{lang}</span>
   </div>
