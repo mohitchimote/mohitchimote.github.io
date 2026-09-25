@@ -18,8 +18,9 @@ const {
   users, role, problem, architecture, outcome,
   stack, aiFeatures, diagram, codeSnippet, screenshots, links,
 } = entry.data;
+const noindex = entry.slug === 'journey-los';
 ---
-<BaseLayout title={`${title} — Mohit Chimote`} description={summary}>
+<BaseLayout title={`${title} — Mohit Chimote`} description={summary} noindex={noindex}>
 
   <section class="case-hero">
     <div class="breadcrumb"><a href="/">Mohit Chimote</a> / <a href="/#projects">Work</a> / {title}</div>

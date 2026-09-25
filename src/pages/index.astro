@@ -3,11 +3,10 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 
-const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
+const work = (await getCollection('work', ({ slug }) => slug !== 'journey-los')).sort((a, b) => a.data.order - b.data.order);
 
 const categories: Record<string, string> = {
   'inventpro': 'B2B SaaS',
-  'journey-los': 'FinTech · LOS',
   'letwise-uk': 'PropTech',
   'clinic-tracker': 'Personal FinTech',
   'life-partner-seek': 'Consumer',

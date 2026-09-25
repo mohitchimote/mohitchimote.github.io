@@ -5,7 +5,7 @@ import { Code } from 'astro:components';
 import type { CodeLanguage } from 'astro';
 import '../styles/print.css';
 
-const work = (await getCollection('work')).sort((a, b) => a.data.order - b.data.order);
+const work = (await getCollection('work', ({ slug }) => slug !== 'journey-los')).sort((a, b) => a.data.order - b.data.order);
 
 const statusLabels: Record<string, string> = { live: 'Live', poc: 'Proof of Concept', built: 'Built · Awaiting operator' };
 const statusClass: Record<string, string> = { live: 'badge-live', poc: 'badge-poc', built: 'badge-built' };
